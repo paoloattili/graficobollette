@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  fe:
+    build: ./dockerfiles/fe
+    environment:
+     - ENV=local
+    restart: always
+    ports:
+      - '4200:4200'
+  be:
+    build: ./dockerfiles/be
+    environment:
+     - DB_HOST=http://postgres:5432
+    restart: always
+    ports:
+      - '8080:8080'
+  db:
+    image: postgres
+    hostname: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=paoloattili
+      - POSTGRES_PASSWORD=psqlpsswd
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+volumes:
+  be:
+    driver: local
+  db:
+    driver: local
+  
