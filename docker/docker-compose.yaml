@@ -4,20 +4,28 @@ services:
     build: ./dockerfiles/fe
     environment:
      - ENV=local
-    restart: always
     ports:
-      - '4200:4200'
+      - '4200:80'
+    volumes: 
+      - fe:/graficobollette/fe/node_modules
+    depends_on:
+      - be
   be:
     build: ./dockerfiles/be
     environment:
-     - DB_HOST=http://postgres:5432
-    restart: always
+     - ENV=local
+     - DB_HOST=jdbc:postgresql://postgres:5432/postgres
+     - DB_USER=paoloattili
+     - DB_PASSWORD=psqlpsswd
     ports:
       - '8080:8080'
+    volumes: 
+      - be:/graficobollette/be/logs
+    depends_on:
+      - db
   db:
     image: postgres
     hostname: postgres
-    restart: always
     environment:
       - POSTGRES_USER=paoloattili
       - POSTGRES_PASSWORD=psqlpsswd
@@ -26,6 +34,8 @@ services:
     volumes: 
       - db:/var/lib/postgresql/data
 volumes:
+  fe:
+    driver: local
   be:
     driver: local
   db:
