@@ -3,6 +3,11 @@
 echo 'delete old version'
 cd docker
 docker-compose down
+docker image rmi fe
+docker image rmi be
+docker image rmi docker-fe
+docker image rmi docker-be
+docker image rmi postgres
 cd ..
 cd src
 
@@ -14,7 +19,6 @@ cd ..
 cd docker
 cd dockerfiles
 cd be
-docker build --no-cache -t be .
 cd ..
 cd ..
 cd ..
@@ -28,7 +32,6 @@ cd ..
 cd docker
 cd dockerfiles
 cd fe
-docker build --no-cache -t fe .
 cd ..
 cd ..
 cd ..

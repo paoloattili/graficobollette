@@ -5,7 +5,7 @@ services:
     environment:
      - ENV=local
     ports:
-      - '4200:80'
+      - '3000:80'
     volumes: 
       - fe:/graficobollette/fe/node_modules
     depends_on:

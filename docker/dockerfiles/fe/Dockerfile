@@ -4,4 +4,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ADD ./dist/fe /usr/share/nginx/html
 
-EXPOSE 4200
+EXPOSE 3000
